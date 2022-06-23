@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h2>Hello</h2>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for m in messages %}
+            <p>{{m}}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% for score in scores %}
+<table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Math</th>
+        <th scope="col">Physics</th>
+        <th scope="col">Chemistry</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{score.student_id}}</th>
+        <td>{{score.Math}}</td>
+        <td>{{score.Physics}}</td>
+        <td>{{score.Chemistry}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+{% endfor %} 
+{% endblock main %}

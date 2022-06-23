@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+    
+{% block main %}
+<form method="post">
+    <input type="number" class="form-control" id="recipient-name" required="1" name="Math" placeholder="Math">
+    <input type="number" class="form-control" id="recipient-name" required="1" name="Physics" placeholder="Physics">
+    <input type="number" class="form-control" id="recipient-name" required="1" name="Chemistry" placeholder="Chemistry">
+    <input type="number" class="form-control" id="recipient-name" required="1" name="student_id" placeholder="Student's ID">
+    <a href='/student'><button type="submit" class="btn btn-success">Submit</button></a>
+</form>
+{% endblock main %}

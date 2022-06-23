@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<form method="post">
+    <input type="text" class="form-control" id="recipient-name" required="1" name="name">
+    <input type="date" data-date-format="dd/mm/yyyy" class="datepicker" id="txtDate" required="1" name="birthdate">
+    <input type="text" class="form-control" id="recipient-name" required="1" name="gender">
+    <input type="number" class="form-control" id="recipient-name" required="1" name="pnumber">
+    <input type="text" class="form-control" id="recipient-name" required="1" name="classnum">
+    <a href='/student'><button type="submit" class="btn btn-success">Submit</button></a>
+</form>
+<script>
+$('.datepicker').datepicker({
+    format: 'dd/mm/yyyy',
+    startDate: '-3d'
+})
+</script>
+{% endblock main %}

@@ -1,0 +1,47 @@
+HTML CSSResult Skip Results Iframe
+EDIT ON
+body {
+  background: #ececec;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 20px;
+  background: #abbaab;
+  background: -webkit-linear-gradient(to top, #ffffff, #abbaab);
+  background: linear-gradient(to top, #ffffff, #abbaab);
+}
+
+#content {
+  height: 100vh;
+  margin: 50vh auto;
+}
+
+a {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+#horz-list ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}
+
+#horz-list ul li {
+  display: inline;
+}
+
+#horz-list ul li a {
+  text-decoration: none;
+  padding: 0.2em 1.1em;
+  border-right: 1px solid rgba(255, 255, 255, 0.8);
+  margin: 0 0 0 -6px;
+}
+
+#horz-list ul li:last-child a {
+  border: none;
+}
+
+#horz-list ul li a:hover {
+  background: rgba(255, 255, 255, 0.8);
+  color: #1a1a1a;
+}
