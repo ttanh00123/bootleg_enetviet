@@ -10,7 +10,7 @@
     {% endif %}
 {% endwith %}
 
-{% for score in scores %}
+
 <table class="table table-striped table-dark">
     <thead>
       <tr>
@@ -20,6 +20,7 @@
         <th scope="col">Chemistry</th>
       </tr>
     </thead>
+    {% for score in scores %}
     <tbody>
       <tr>
         <th scope="row">{{score.student_id}}</th>
@@ -28,7 +29,8 @@
         <td>{{score.Chemistry}}</td>
       </tr>
     </tbody>
+    {% endfor %} 
   </table>
 
-{% endfor %} 
+
 {% endblock main %}

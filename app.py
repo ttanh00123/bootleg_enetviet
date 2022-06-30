@@ -63,7 +63,7 @@ def add():
 
 @app.route('/scoreboard')
 def scoreboard():
-    data = Score.query.all()
+    data = Score.query.order_by(Score.student_id).all()
     return render_template('scoreboard.html', scores=data)
 
 @app.route('/scoreboard/add', methods=['POST', 'GET'])
