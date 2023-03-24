@@ -8,6 +8,15 @@ app.config["SECRET_KEY"] = "ieatass69"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///user.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+class User(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(69))
+    admin = db.Column(db.Boolean)
+
+    def __init__(self, name, admin):
+        self.name = name
+        self.admin = admin
+
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(69))
@@ -42,6 +51,22 @@ class Score(db.Model):
 def index():
     return render_template('index.html')
 
+@app.route("/login", methods=["POST", "GET"])
+def login():
+    if request.method == "POST":   
+        user_name = request.form["name"]
+        session.permanent = True
+        if user_name:
+            session["user"] = user_name
+            user = User(user_name)
+            db.session.add(user)
+            db.session.commit()
+            print(user_name)
+            flash("Logged in successfully, welcome!", "success")
+            return redirect(url_for("user"))
+    return render_template("login.html")
+
+
 @app.route('/student')
 def student():
     data = Student.query.all()
@@ -50,6 +75,8 @@ def student():
 @app.route('/student/add', methods=['POST', 'GET'])
 def add():
     if request.method == 'POST':
+        s = select(User).where(User.admin == 1)
+
         name = request.form['name']
         birthdatestr = request.form['birthdate']
         birthdate = datetime.strptime(birthdatestr, '%Y-%m-%d').date()

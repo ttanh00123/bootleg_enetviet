@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Login Page{% endblock %}
+
+{% block main %}
+<h2>This is Login Page</h2>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for m in messages %}
+            <P>{{m}}</P>
+        {% endfor %} 
+    {% endif %} 
+{% endwith %}
+<div>
+    <form class="row g-3" action="#" method="post">
+        <div class="col-auto">
+        <p>Username</p>
+          <input type="text" class="form-control" id="inputPassword2" placeholder="e.g: John Doe" name="name" value="{{name if name}}"></input>
+        <button style="background-color: lime" class="btn btn-primary" type="submit">Login</button>
+        </div>
+    </form>
+</div>
+<script>
+    console.log(getElementById("inputPassword2"));
+</script>
+{% endblock main %}
