@@ -2,6 +2,7 @@ from flask import Flask, render_template, session, request, redirect, url_for, f
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from datetime import datetime
+from sqlalchemy import select
 app = Flask(__name__) 
 db = SQLAlchemy(app)
 app.config["SECRET_KEY"] = "ieatass69"
@@ -86,7 +87,15 @@ def add():
         student = Student(name, birthdate, gender, pnumber, classnum)
         db.session.add(student)
         db.session.commit()
-    return render_template('/student/add.html')
+        return redirect('/student')
+    return render_template('student/add.html')
+
+@app.route("/student/delete/<id>")
+def delete(id):
+    data = Student.query.get(id)
+    db.session.delete(data)
+    db.session.commit()
+    return redirect('/student')
 
 @app.route('/scoreboard')
 def scoreboard():

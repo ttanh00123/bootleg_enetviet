@@ -23,6 +23,7 @@
         <th>Birthdate</th>
         <th>Phone Num</th>
         <th>Class</th>
+        <th>     </th>
       </tr>
     </thead>
     {% for student in students %}
@@ -34,6 +35,7 @@
         <td>{{student.birthdate}}</td>
         <td>{{student.pnumber}}</td>
         <td>{{student.classnum}}</td>
+        <td><a href="/student/delete/{{student.id}}"><button type="button" class="btn btn-danger" onclick="return confirm('Sure?')">Delete</button></a></td>
         
     </tbody>
     {% endfor %}

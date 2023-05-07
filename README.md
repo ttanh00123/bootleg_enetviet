@@ -1,2 +1,2 @@
-# bootleg_enetviet
-you got 10 in math woohoo
+# Studmanagement
+A platform where you can store data of students and their scores, along with the ability to view their insights.
