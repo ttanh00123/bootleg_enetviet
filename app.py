@@ -1,14 +1,16 @@
-from flask import Flask, render_template, session, request, redirect, url_for, flash
+from flask import Flask, render_template, session, request, redirect, url_for, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from os import path
+import os
 from datetime import datetime
 from sqlalchemy import select
+import plotly.express as px
+import pandas as pd
 app = Flask(__name__) 
-db = SQLAlchemy(app)
 app.config["SECRET_KEY"] = "ieatass69"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///user.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+db = SQLAlchemy(app)
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(69))
@@ -50,7 +52,13 @@ class Score(db.Model):
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    # Get the data from the database.
+    results = Score.query.all()
+    data = [{'Math': d.Math, 'Chemistry': d.Chemistry, 'Physics': d.Physics, 'id': d.student_id} for d in results]
+    df = {'Math': [d['Math'] for d in data], 'Chemistry': [d['Chemistry'] for d in data], 'Physics': [d['Physics'] for d in data], 'id': [d['id'] for d in data]} 
+    fig = px.bar(df, x='id', y='Math', color='Math', barmode='group')
+    # Render the report template with the data and charts.
+    return render_template('index.html', plot=fig.to_html(full_html=False))
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
@@ -76,8 +84,6 @@ def student():
 @app.route('/student/add', methods=['POST', 'GET'])
 def add():
     if request.method == 'POST':
-        s = select(User).where(User.admin == 1)
-
         name = request.form['name']
         birthdatestr = request.form['birthdate']
         birthdate = datetime.strptime(birthdatestr, '%Y-%m-%d').date()

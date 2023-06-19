@@ -6,11 +6,11 @@ from dash.dependencies import Input, Output
 import plotly.express as px
 from sqlalchemy import create_engine
 
-engine = create_engine("sqlite:///data.db")
+
 
 query = """
 SELECT * 
-  FROM weather;
+  FROM scoreboard;
 """
 
 weather = pd.read_sql(query, engine)
@@ -25,7 +25,7 @@ app = dash.Dash(__name__)
 
 
 # Create an app layout
-app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
+app.layout = html.Div(children=[html.H1("Class's Statistics",
                                         style={'textAlign': 'center', 'color': '#503D36',
                                                'font-size': 40}),
                                 # TASK 1: Add a dropdown list to enable Launch Site selection
